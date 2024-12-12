@@ -12,6 +12,21 @@
 
 #include "push_swap.h"
 
+int	validate_atoi_result(const char *str, long result, int symb)
+{
+	int	i;
+
+	if (result > 2147483647 || result < -2147483648)
+		return (0);
+	i = 0;
+	while (str[i] != '\0' && (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
+			|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r'))
+		i++;
+	if (str[i] != '\0')
+		return (0);
+	return (1);
+}
+
 int	is_number(char *str)
 {
 	if (*str == '-' || *str == '+')
@@ -27,26 +42,33 @@ int	is_number(char *str)
 	return (1);
 }
 
-int	ft_atoi_safe(char *str, int *error)
+int	ft_atoi(const char *str)
 {
-	long	result;
-	int		sign;
+	int	i;
+	int	result;
+	int	symb;
 
 	result = 0;
-	sign = 1;
-	if (*str == '-' || *str == '+')
-		sign = (*str++ == '-') ? -1 : 1;
-	while (*str)
+	symb = 1;
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r')
+		i++;
+	while (str[i] == '+' || str[i] == '-')
 	{
-		result = result * 10 + (*str - '0');
-		if (result > 2147483647 || result < -2147483648)
-		{
-			*error = 1;
+		if (str[i++] == '-')
+			symb *= -1;
+		if (str[i] == '+' || str[i] == '-')
 			return (0);
-		}
-		str++;
 	}
-	return ((int)(result * sign));
+	while (str[i] > 47 && str[i] < 58)
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	if (!validate_atoi_result(str, result, symb))
+		return (0);
+	return (result * symb);
 }
 
 int	fill_stack(t_stack *stack, int argc, char **argv)

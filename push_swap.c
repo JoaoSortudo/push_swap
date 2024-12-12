@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+void	free_stacks(t_stack a, t_stack b)
+{
+	free_stack(a);
+	free_stack(b);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
@@ -32,12 +38,10 @@ int	main(int argc, char **argv)
 	if (!fill_stack(stack_a, argc, argv))
 	{
 		write(2, "Error\n", 6);
-		free_stack(stack_a);
-		free_stack(stack_b);
+		free_stacks(stack_a, stack_b);
 		return (1);
 	}
 	sort(stack_a, stack_b);
-	free_stack(stack_a);
-	free_stack(stack_b);
+	free_stacks(stack_a, stack_b);
 	return (0);
 }

@@ -16,7 +16,7 @@ t_stack	*init_stack(void)
 {
 	t_stack	*stack;
 
-	*stack = (t_stack *)malloc(sizeof(t_stack));
+	stack = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
 	stack->top = NULL;
@@ -26,22 +26,25 @@ t_stack	*init_stack(void)
 
 void	free_stack(t_stack *stack)
 {
-	t_node	*tmp;
+	t_node	*temp;
 
+	if (!stack)
+		return ;
 	while (stack->top)
 	{
-		tmp = stack->top;
+		temp = stack->top;
 		stack->top = stack->top->next;
-		free(tmp);
+		free(temp);
 	}
 	free(stack);
 }
+
 
 int	push(t_stack *stack, int value)
 {
 	t_node	*new_node;
 
-	*new_node = (t_node *)malloc(sizeof(t_node));
+	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
 		return (0);
 	new_node->value = value;

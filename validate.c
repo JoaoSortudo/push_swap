@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	validate_atoi_result(const char *str, long result, int symb)
+int	validate_atoi_result(const char *str, long result)
 {
 	int	i;
 
@@ -66,7 +66,7 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	if (!validate_atoi_result(str, result, symb))
+	if (!validate_atoi_result(str, result))
 		return (0);
 	return (result * symb);
 }
@@ -83,7 +83,7 @@ int	fill_stack(t_stack *stack, int argc, char **argv)
 		if (!is_number(argv[i]))
 			return (0);
 		error = 0;
-		value = ft_atoi_safe(argv[i], &error);
+		value = ft_atoi(argv[i]);
 		if (error || !push(stack, value))
 			return (0);
 		i++;

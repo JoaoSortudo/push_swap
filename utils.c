@@ -16,7 +16,7 @@ void	print_stack(t_stack *stack)
 {
 	t_node	*current;
 
-	*current = stack->top;
+	current = stack->top;
 	while (current)
 	{
 		ft_printf("%d\n", current->value);

@@ -12,10 +12,12 @@
 
 #include "push_swap.h"
 
-void	free_stacks(t_stack a, t_stack b)
+void	free_stacks(t_stack *a, t_stack *b)
 {
-	free_stack(a);
-	free_stack(b);
+	if (a)
+		free_stack(a);
+	if (b)
+		free_stack(b);
 }
 
 int	main(int argc, char **argv)

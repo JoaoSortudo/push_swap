@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	print_stack(t_stack *stack)
 {
@@ -19,7 +20,7 @@ void	print_stack(t_stack *stack)
 	current = stack->top;
 	while (current)
 	{
-		ft_printf("%d\n", current->value);
+		printf("%d\n", current->value);
 		current = current->next;
 	}
 }

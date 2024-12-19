@@ -13,7 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
+// # include "../libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -33,12 +33,13 @@ void	free_stack(t_stack *stack);
 int		push(t_stack *stack, int value);
 int		pop(t_stack *stack);
 void	free_stacks(t_stack *a, t_stack *b);
+void	print_stack(t_stack *stack);
 
 // Funções auxiliares
 int		fill_stack(t_stack *stack, int argc, char **argv);
 int		validate_atoi_result(const char *str, long result);
 int		is_number(char *str);
-int		ft_atoi(const char *str);
+int	ft_atoi(const char *str, int *error);
 
 // Funções de algoritmos
 void	convert_to_index(t_stack *stack);

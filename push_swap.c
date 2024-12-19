@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	sort(stack_a, stack_b);
+	print_stack(stack_a);
 	free_stacks(stack_a, stack_b);
 	return (0);
 }

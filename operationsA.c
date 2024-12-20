@@ -25,6 +25,8 @@ void	sa(t_stack *stack)
 	first->next = second->next;
 	second->next = first;
 	stack->top = second;
+	write(1, "sa", 2);
+	write(1, "\n", 1);
 }
 
 // Move o topo da pilha B para a pilha A
@@ -37,6 +39,8 @@ void	pa(t_stack *a, t_stack *b)
 		value = pop(b);
 		push(a, value);
 	}
+	write(1, "pa", 2);
+	write(1, "\n", 1);
 }
 
 void	ra(t_stack *stack)
@@ -53,6 +57,8 @@ void	ra(t_stack *stack)
 	stack->top = first->next;
 	first->next = NULL;
 	current->next = first;
+	write(1, "ra", 2);
+	write(1, "\n", 1);
 }
 
 void	rra(t_stack *stack)
@@ -72,4 +78,6 @@ void	rra(t_stack *stack)
 	prev->next = NULL;
 	current->next = stack->top;
 	stack->top = current;
+	write(1, "rra", 3);
+	write(1, "\n", 1);
 }

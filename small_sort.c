@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	sort_two(t_stack *a)
 {
@@ -78,7 +79,9 @@ void	small_sort(t_stack *a, t_stack *b)
 	if (a->size == 2)
 		sort_two(a);
 	else if (a->size == 3)
+	{
 		sort_three(a);
+	}
 	else if (a->size <= 5)
 		sort_four_or_five(a, b);
 }

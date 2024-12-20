@@ -25,12 +25,6 @@ void	print_stack(t_stack *stack)
 	}
 }
 
-int	print_and_return(char *msg)
-{
-	printf("%s\n", msg);
-	return (0);
-}
-
 void	ft_swap(int *a, int *b)
 {
 	int	temp;

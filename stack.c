@@ -12,6 +12,18 @@
 
 #include "push_swap.h"
 
+t_node	*run_list(t_stack *stack)
+{
+	t_node	*current;
+
+	current = stack->top;
+	while (current && current->next)
+	{
+		current = current->next;
+	}
+	return (current);
+}
+
 t_stack	*init_stack(void)
 {
 	t_stack	*stack;
@@ -47,8 +59,11 @@ int	push(t_stack *stack, int value)
 	if (!new_node)
 		return (0);
 	new_node->value = value;
-	new_node->next = stack->top;
-	stack->top = new_node;
+	new_node->next = NULL;
+	if (stack->top)
+		run_list(stack)->next = new_node;
+	else
+		stack->top = new_node;
 	stack->size++;
 	return (1);
 }

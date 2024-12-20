@@ -21,11 +21,11 @@
 
 int	is_number(char *str)
 {
-	if (!str || !*str) // Verifica string vazia
+	if (!str || !*str)
 		return (0);
 	if (*str == '-' || *str == '+')
 		str++;
-	if (!*str) // Verifica caso apenas tenha um sinal
+	if (!*str)
 		return (0);
 	while (*str)
 	{
@@ -36,49 +36,52 @@ int	is_number(char *str)
 	return (1);
 }
 
-int	ft_atoi(const char *str, int *error)
+long int	ft_atoll(const char *str)
 {
-	int		i;
-	long	result;
-	int		symb;
+	long int	result;
+	int			i;
+	int			symb;
 
-	*error = 0;
 	result = 0;
 	symb = 1;
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
 		|| str[i] == '\f' || str[i] == '\r')
 		i++;
-	if (str[i] == '-' || str[i] == '+')
-		symb = (str[i++] == '-') ? -1 : 1;
-	while (str[i] >= '0' && str[i] <= '9')
+	while (str[i] == '+' || str[i] == '-')
 	{
-		result = result * 10 + (str[i++] - '0');
-		if (result * symb > 2147483647 || result * symb < -2147483648)
-			*error = 1;
+		if (str[i] == '-')
+			symb *= -1;
+		i++;
+		if (str[i] == '+' || str[i] == '-')
+			return (0);
 	}
-	if (str[i] != '\0')
-		*error = 1;
-	return (*error ? 0 : (int)(result * symb));
+	while (str[i] > 47 && str[i] < 58)
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return (result * symb);
 }
 
 int	fill_stack(t_stack *stack, int argc, char **argv)
 {
-	int	i;
-	int	value;
-	int	error;
+	long int	value;
+	int			i;
 
 	i = 1;
 	while (i < argc)
 	{
 		if (!is_number(argv[i]))
-			print_and_return("Invalid argument");
-		value = ft_atoi(argv[i], &error);
-		if (error)
-			print_and_return("Conversion error");
+			return (0);
+		value = ft_atoll(argv[i]);
+		if (value > 2147483647 || value < -2147483648)
+			return (0);
 		if (!push(stack, value))
-			print_and_return("Push error");
+			return (0);
 		i++;
 	}
+	// if (has_double(stack))
+	// 	return (0);
 	return (1);
 }

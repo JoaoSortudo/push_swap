@@ -21,6 +21,8 @@ void	pb(t_stack *a, t_stack *b)
 		value = pop(a);
 		push(b, value);
 	}
+	write(1, "pb", 2);
+	write(1, "\n", 1);
 }
 
 void	sb(t_stack *stack)
@@ -35,6 +37,8 @@ void	sb(t_stack *stack)
 	first->next = second->next;
 	second->next = first;
 	stack->top = second;
+	write(1, "sb", 2);
+	write(1, "\n", 1);
 }
 
 void	rb(t_stack *stack)
@@ -53,6 +57,8 @@ void	rb(t_stack *stack)
 	}
 	last->next = first;
 	first->next = NULL;
+	write(1, "rb", 2);
+	write(1, "\n", 1);
 }
 
 void	rrb(t_stack *stack)
@@ -72,4 +78,6 @@ void	rrb(t_stack *stack)
 	prev->next = NULL;
 	last->next = stack->top;
 	stack->top = last;
+	write(1, "rrb", 2);
+	write(1, "\n", 1);
 }

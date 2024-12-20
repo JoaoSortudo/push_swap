@@ -49,7 +49,7 @@ void	convert_to_index(t_stack *stack)
 	int		*values;
 	int		i;
 
-	values = malloc(stack->size * sizeof(int));
+	values = malloc(stack->size * sizeof(long int));
 	if (!values)
 		return ;
 	current = stack->top;

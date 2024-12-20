@@ -40,7 +40,7 @@
 # .PHONY: all clean fclean re
 NAME = push_swap
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 SRC = push_swap.c utils.c stack.c validate.c small_sort.c radix.c operations.c operationsA.c operationsB.c
 OBJ = $(SRC:.c=.o)
 

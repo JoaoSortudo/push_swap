@@ -20,10 +20,13 @@ void	sort_two(t_stack *a)
 
 void	sort_three(t_stack *a)
 {
-	int	first = a->top->value;
-	int	second = a->top->next->value;
-	int	third = a->top->next->next->value;
+	int	first;
+	int	second;
+	int	third;
 
+	first = a->top->value;
+	second = a->top->next->value;
+	third = a->top->next->next->value;
 	if (first > second && second < third && first < third)
 		sa(a);
 	else if (first > second && second > third)
@@ -46,11 +49,11 @@ void	sort_four_or_five(t_stack *a, t_stack *b)
 {
 	t_node	*current;
 	int		min;
+
 	while (a->size > 3) // Mover os menores elementos para `b`
 	{
 		current = a->top;
 		min = current->value;
-
 		// Encontra o menor elemento
 		while (current)
 		{

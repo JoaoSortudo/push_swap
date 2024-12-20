@@ -39,7 +39,6 @@ void	free_stack(t_stack *stack)
 	free(stack);
 }
 
-
 int	push(t_stack *stack, int value)
 {
 	t_node	*new_node;

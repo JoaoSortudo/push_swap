@@ -39,7 +39,9 @@ void	print_stack(t_stack *stack);
 int		fill_stack(t_stack *stack, int argc, char **argv);
 int		validate_atoi_result(const char *str, long result);
 int		is_number(char *str);
-int	ft_atoi(const char *str, int *error);
+int		ft_atoi(const char *str, int *error);
+int		print_and_return(char *msg);
+void	ft_swap(int *a, int *b);
 
 // Funções de algoritmos
 void	convert_to_index(t_stack *stack);

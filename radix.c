@@ -12,12 +12,42 @@
 
 #include "push_swap.h"
 
+static void	bubble_sort(int *array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		if (array[i + 1] && array[i] > array [i + 1])
+		{
+			ft_swap(&array[i], &array[i + 1]);
+			i = 0;
+		}
+		else
+			i++;
+	}
+}
+
+static int	find_index(int value, int *values, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (values[i] == value)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 void	convert_to_index(t_stack *stack)
 {
 	t_node	*current;
 	int		*values;
 	int		i;
-	int		j;
 
 	values = malloc(stack->size * sizeof(int));
 	if (!values)
@@ -26,28 +56,14 @@ void	convert_to_index(t_stack *stack)
 	i = 0;
 	while (current)
 	{
-		values[i++] = current->value; // Armazena os valores da pilha em um array
+		values[i++] = current->value;
 		current = current->next;
 	}
-	// Ordena os valores
-	for (i = 0; i < stack->size - 1; i++)
-		for (j = i + 1; j < stack->size; j++)
-			if (values[i] > values[j])
-			{
-				int temp = values[i];
-				values[i] = values[j];
-				values[j] = temp;
-			}
-	// Substitui valores pelos índices
+	bubble_sort(values);
 	current = stack->top;
 	while (current)
 	{
-		for (i = 0; i < stack->size; i++)
-			if (current->value == values[i])
-			{
-				current->value = i;
-				break ;
-			}
+		current->value = find_index(current->value, values, stack->size);
 		current = current->next;
 	}
 	free(values);
@@ -55,29 +71,29 @@ void	convert_to_index(t_stack *stack)
 
 void	radix_sort(t_stack *a, t_stack *b)
 {
-	int	max_bits; // Quantidade de bits no maior número
+	int	max_bits;
 	int	i;
 	int	j;
 	int	size;
 
 	size = a->size;
 	max_bits = 0;
-	while ((size - 1) >> max_bits != 0) // Calcula o número de bits necessários
+	while ((size - 1) >> max_bits != 0)
 		max_bits++;
 	i = 0;
-	while (i < max_bits) // Para cada bit
+	while (i < max_bits)
 	{
 		j = 0;
-		while (j < size) // Para cada número na pilha
+		while (j < size)
 		{
-			if (((a->top->value >> i) & 1) == 0) // Verifica o bit atual
-				pb(a, b); // Bit 0 -> vai para b
+			if (((a->top->value >> i) & 1) == 0)
+				pb(a, b);
 			else
-				ra(a); // Bit 1 -> rotaciona em a
+				ra(a);
 			j++;
 		}
 		while (b->size > 0)
-			pa(a, b); // Retorna todos os números para a
+			pa(a, b);
 		i++;
 	}
 }
@@ -85,10 +101,10 @@ void	radix_sort(t_stack *a, t_stack *b)
 void	sort(t_stack *a, t_stack *b)
 {
 	if (a->size <= 5)
-		small_sort(a, b); // Ordenação especial para pilhas pequenas
+		small_sort(a, b);
 	else
 	{
-		convert_to_index(a); // Converte valores para índices
-		radix_sort(a, b);    // Aplica o Radix Sort
+		convert_to_index(a);
+		radix_sort(a, b);
 	}
 }

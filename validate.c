@@ -19,7 +19,6 @@
 // 	return (1);
 // }
 
-
 int	is_number(char *str)
 {
 	if (!str || !*str) // Verifica string vazia
@@ -63,7 +62,6 @@ int	ft_atoi(const char *str, int *error)
 	return (*error ? 0 : (int)(result * symb));
 }
 
-
 int	fill_stack(t_stack *stack, int argc, char **argv)
 {
 	int	i;
@@ -74,21 +72,12 @@ int	fill_stack(t_stack *stack, int argc, char **argv)
 	while (i < argc)
 	{
 		if (!is_number(argv[i]))
-		{
-			write(2, "Invalid argument\n", 17);
-			return (0);
-		}
+			print_and_return("Invalid argument");
 		value = ft_atoi(argv[i], &error);
 		if (error)
-		{
-			write(2, "Conversion error\n", 17);
-			return (0);
-		}
+			print_and_return("Conversion error");
 		if (!push(stack, value))
-		{
-			write(2, "Push error\n", 11);
-			return (0);
-		}
+			print_and_return("Push error");
 		i++;
 	}
 	return (1);
